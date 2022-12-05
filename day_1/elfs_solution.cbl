@@ -60,7 +60,6 @@
            ADD SECOND_BIGGEST_SUM TO TOTAL_SUM 
            ADD THIRD_BIGGEST_SUM TO TOTAL_SUM 
 
-           DISPLAY "Hello World!".
            DISPLAY "1ST ELF: "
                    BIGGEST_ELF
                    "SUM: "
