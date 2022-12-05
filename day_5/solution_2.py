@@ -18,7 +18,6 @@ stacks.append(["D", "G", "N", "P"])
 stacks.append(["D", "Z", "P", "V", "F", "C", "W"])
 stacks.append(["C", "P", "D", "M", "S"])
 stacks.append(["Z", "N", "W", "T", "V", "M", "P", "C"])
-instructions = []
 
 
 def print_top_of_stacks(stacks):
@@ -26,38 +25,26 @@ def print_top_of_stacks(stacks):
         print(index, stack[-1:])
 
 
-def get_instructions_mapped():
+def perform_movements():
     with open("input") as instructions_file:
-        for instruction in instructions_file:
-            instructions_splitted = instruction.split(" ")
-            instructions.append(
-                {
-                    "move": int(instructions_splitted[1]),
-                    "from": int(instructions_splitted[3]),
-                    "to": int(instructions_splitted[5].replace("\n", "")),
-                }
+        for instructions in instructions_file:
+            amount_to_move = int(instructions.split(" ")[1])
+            from_stack = int(instructions.split(" ")[3])
+            to_stack = int(instructions.split(" ")[5])
+            print(
+                f"***\nMoving {amount_to_move} from {from_stack} to {to_stack}"
             )
-
-
-def perform_movements(movements):
-    print(
-        f'***\nMoving {movements["move"]} from {movements["from"]} to {movements["to"]}'
-    )
-    print(f'Original stack {movements["from"]} : {stacks[movements["from"]]}')
-    print(f'Original stack {movements["to"]} : {stacks[movements["to"]]}')
-    elements_to_move = stacks[movements["from"]][-movements["move"] :]
-    del stacks[movements["from"]][-movements["move"] :]
-    stacks[movements["to"]].extend(elements_to_move)
-    print(f'New stack {movements["from"]} : {stacks[movements["from"]]}')
-    print(f'New stack {movements["to"]} : {stacks[movements["to"]]}')
+            print(f"Original stack {from_stack} : {stacks[from_stack]}")
+            print(f"Original stack {to_stack} : {stacks[to_stack]}")
+            elements_to_move = stacks[from_stack][-amount_to_move:]
+            del stacks[from_stack][-amount_to_move:]
+            stacks[to_stack].extend(elements_to_move)
+            print(f"New stack {from_stack} : {stacks[from_stack]}")
+            print(f"New stack {to_stack} : {stacks[to_stack]}")
 
 
 def main():
-    get_instructions_mapped()
-
-    for instruction in instructions:
-        perform_movements(instruction)
-
+    perform_movements()
     print_top_of_stacks(stacks)
 
 
