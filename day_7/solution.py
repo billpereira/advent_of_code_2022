@@ -1,5 +1,3 @@
-from pathlib import Path
-
 folder_structure = {}
 all_folder_size = {}
 current_folder = []
@@ -51,7 +49,7 @@ def calculate_total_size_of_folders():
     total_available = total_file_system - total_used_space
     total_needed = 30000000 - total_available
     smallest_needed_to_delete = total_file_system
-    path_to_delete = Path("")
+    path_to_delete = ""
 
     for item in all_folder_size:
         if all_folder_size[item] >= total_needed:
