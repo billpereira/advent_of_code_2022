@@ -38,19 +38,13 @@ def calculate_size_current_folder(folder_path):
     return current_sum_of_path
 
 
-def calculate_total_size_of_folders():
-    all_folder_size = {}
-
-    for folder in folder_structure.keys():
-        all_folder_size[folder] = calculate_size_current_folder(folder)
-
+def print_status(all_folder_size):
     total_file_system = 70000000
     total_used_space = all_folder_size["/"]
     total_available = total_file_system - total_used_space
     total_needed = 30000000 - total_available
     smallest_needed_to_delete = total_file_system
     path_to_delete = ""
-
     for item in all_folder_size:
         if all_folder_size[item] >= total_needed:
             if all_folder_size[item] <= smallest_needed_to_delete:
@@ -62,6 +56,13 @@ def calculate_total_size_of_folders():
     print("used:", total_used_space)
     print("Path to delete:", path_to_delete)
     print("Amount:", smallest_needed_to_delete)
+
+
+def calculate_total_size_of_folders():
+    all_folder_size = {}
+    for folder in folder_structure.keys():
+        all_folder_size[folder] = calculate_size_current_folder(folder)
+    print_status(all_folder_size)
 
 
 def proccess_line(line):
@@ -84,7 +85,7 @@ def main():
     with open("small_input") as commands_input:
         for line in commands_input:
             proccess_line(line)
-    print(folder_structure)
+    # print(folder_structure)
     calculate_total_size_of_folders()
 
 
